@@ -1,98 +1,371 @@
 const mineflayer = require('mineflayer');
+const express = require('express');
 const config = require('./config.json');
+
+
+// =======================
+// WEB SERVER
+// =======================
+
+const app = express();
+
+let botStatus = "Starting...";
+let reconnectCount = 0;
+let startTime = Date.now();
+
+
+app.get('/', (req, res) => {
+
+    let uptime = Math.floor((Date.now() - startTime) / 1000);
+
+    res.send(`
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <title>Minecraft AFK Bot</title>
+
+        <style>
+            body {
+                background:#111;
+                color:white;
+                font-family:Arial;
+                text-align:center;
+                padding:40px;
+            }
+
+            .box {
+                background:#222;
+                padding:25px;
+                border-radius:15px;
+                max-width:500px;
+                margin:auto;
+            }
+
+            .online {
+                color:#00ff66;
+            }
+
+        </style>
+
+    </head>
+
+    <body>
+
+    <div class="box">
+
+        <h1>🤖 Minecraft AFK Bot</h1>
+
+        <h2 class="online">
+        🟢 ${botStatus}
+        </h2>
+
+
+        <p>
+        Bot Name:
+        <b>${config.botUsername}</b>
+        </p>
+
+
+        <p>
+        Server:
+        <b>${config.serverHost}:${config.serverPort}</b>
+        </p>
+
+
+        <p>
+        Reconnect:
+        <b>${reconnectCount}</b>
+        </p>
+
+
+        <p>
+        Uptime:
+        <b>${uptime}s</b>
+        </p>
+
+
+    </div>
+
+    </body>
+    </html>
+    `);
+
+});
+
+
+app.listen(7860,()=>{
+    console.log("🌐 Web aktif port 7860");
+});
+
+
+
+
+// =======================
+// MINECRAFT BOT
+// =======================
 
 const STEP_INTERVAL = 1500;
 const JUMP_DURATION = 500;
 
-function createBot() {
-  const bot = mineflayer.createBot({
+
+function createBot(){
+
+
+const bot = mineflayer.createBot({
+
     host: config.serverHost,
+
     port: config.serverPort,
+
     username: config.botUsername,
 
-    // jika server offline mode (Cracked)
-    auth: 'offline',
 
-    // auto detect versi server
-    version: false,
+    // server cracked
+    auth:'offline',
 
-    viewDistance: config.botChunk || 'tiny'
-  });
 
-  let movementPhase = 0;
-  let movementInterval = null;
+    // auto version
+    version:false,
 
-  bot.on('spawn', () => {
-    console.log(`✅ ${config.botUsername} berhasil masuk server`);
 
-    setTimeout(() => {
-      bot.setControlState('sneak', true);
-      console.log('🤖 Bot AFK aktif (Crouching)');
-    }, 3000);
+    viewDistance:
+    config.botChunk || 'tiny'
 
-    // Jalankan siklus pergerakan
-    setTimeout(movementCycle, STEP_INTERVAL);
-  });
+});
 
-  // Gerakan Anti-AFK
-  function movementCycle() {
-    if (!bot.entity) return;
 
-    switch (movementPhase) {
-      case 0:
-        bot.setControlState('forward', true);
-        bot.setControlState('back', false);
-        bot.setControlState('jump', false);
-        break;
 
-      case 1:
-        bot.setControlState('forward', false);
-        bot.setControlState('back', true);
-        bot.setControlState('jump', false);
-        break;
+let movementPhase = 0;
+let movementInterval = null;
 
-      case 2:
-        bot.setControlState('forward', false);
-        bot.setControlState('back', false);
-        bot.setControlState('jump', true);
 
-        setTimeout(() => {
-          bot.setControlState('jump', false);
-        }, JUMP_DURATION);
-        break;
 
-      case 3:
-        bot.setControlState('forward', false);
-        bot.setControlState('back', false);
-        bot.setControlState('jump', false);
-        break;
-    }
+bot.on('spawn',()=>{
 
-    movementPhase = (movementPhase + 1) % 4;
-    movementInterval = setTimeout(movementCycle, STEP_INTERVAL);
-  }
 
-  // Reconnect otomatis saat terputus
-  bot.on('end', () => {
-    console.log('⛔ Bot keluar server.');
-    if (movementInterval) clearTimeout(movementInterval);
+    botStatus="Online";
 
-    console.log('🔄 Mencoba masuk ulang dalam 10 detik...');
-    setTimeout(() => {
-      createBot(); // Membuat instance bot baru
-    }, 10000);
-  });
 
-  // Error handling
-  bot.on('error', (err) => {
-    console.log('⚠️ Error:', err.message);
-  });
+    console.log(
+    `✅ ${config.botUsername} masuk server`
+    );
 
-  // Log chat server
-  bot.on('message', (message) => {
-    console.log('[SERVER]', message.toString());
-  });
+
+    setTimeout(()=>{
+
+
+        bot.setControlState(
+            'sneak',
+            true
+        );
+
+
+        console.log(
+        "🤖 AFK aktif"
+        );
+
+
+    },3000);
+
+
+
+    setTimeout(
+        movementCycle,
+        STEP_INTERVAL
+    );
+
+
+});
+
+
+
+
+
+function movementCycle(){
+
+
+if(!bot.entity)
+return;
+
+
+
+switch(movementPhase){
+
+
+case 0:
+
+bot.setControlState(
+'forward',
+true
+);
+
+bot.setControlState(
+'back',
+false
+);
+
+break;
+
+
+
+case 1:
+
+
+bot.setControlState(
+'forward',
+false
+);
+
+
+bot.setControlState(
+'back',
+true
+);
+
+
+break;
+
+
+
+
+case 2:
+
+
+bot.setControlState(
+'jump',
+true
+);
+
+
+setTimeout(()=>{
+
+bot.setControlState(
+'jump',
+false
+);
+
+
+},JUMP_DURATION);
+
+
+break;
+
+
+
+
+case 3:
+
+
+bot.setControlState(
+'forward',
+false
+);
+
+
+bot.setControlState(
+'back',
+false
+);
+
+
+break;
+
+
 }
 
-// Jalankan bot pertama kali
+
+
+movementPhase =
+(movementPhase+1)%4;
+
+
+
+movementInterval =
+setTimeout(
+movementCycle,
+STEP_INTERVAL
+);
+
+
+}
+
+
+
+
+
+bot.on('end',()=>{
+
+
+botStatus="Offline - Reconnecting";
+
+
+console.log(
+"⛔ Bot keluar"
+);
+
+
+
+reconnectCount++;
+
+
+
+if(movementInterval)
+clearTimeout(
+movementInterval
+);
+
+
+
+setTimeout(()=>{
+
+
+createBot();
+
+
+},10000);
+
+
+
+});
+
+
+
+
+
+
+bot.on('error',(err)=>{
+
+
+console.log(
+"⚠️ Error:",
+err.message
+);
+
+
+});
+
+
+
+
+
+bot.on('message',(message)=>{
+
+
+console.log(
+"[SERVER]",
+message.toString()
+);
+
+
+});
+
+
+
+}
+
+
+
+
+// START
+
 createBot();
