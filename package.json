@@ -4,8 +4,8 @@
   "description": "",
   "main": "bot.js",
   "scripts": {
-    "start": "node bot.js"
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node bot.js",
+    "build": "echo build complete"
   },
   "keywords": [],
   "author": "",
@@ -13,8 +13,6 @@
   "type": "commonjs",
   "dependencies": {
     "mineflayer": "^4.38.0",
-    "express": "^4.21.0"
-  "dependencies": {
-    "express": "^5.2.1"
+    "express": "^5.1.0"
   }
 }
