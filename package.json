@@ -1,5 +1,4 @@
 {
-<<<<<<< HEAD
   "name": "minecraft-afk-bot",
   "version": "1.0.0",
   "description": "",
@@ -15,9 +14,7 @@
   "dependencies": {
     "mineflayer": "^4.38.0",
     "express": "^4.21.0"
-=======
   "dependencies": {
     "express": "^5.2.1"
->>>>>>> aa84f68 (Minecraft AFK Bot with web dashboard)
   }
 }
