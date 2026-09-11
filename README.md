@@ -130,6 +130,10 @@ npm run check
 
 Test mencakup prioritas survival, validasi output AI, automatic provider switching, mapping bahasa natural, permission default-deny, dan secret environment. Pengujian aksi dunia penuh memerlukan server development karena placement, recipe, dan metadata block bergantung versi Minecraft serta plugin server.
 
+### Deployment Vercel
+
+Vercel menggunakan `src/app.js` untuk preview dashboard read-only dan `public/` yang dihasilkan oleh `npm run build`. Start/stop bot sengaja dinonaktifkan pada entry serverless karena koneksi Minecraft membutuhkan proses Node.js persisten. Jalankan `npm start` pada VPS/container/Replit untuk bot aktif.
+
 ## Batas keselamatan
 
 Bot tidak menyerang entity player, hanya menerima chat command dari `owners`, dan hanya menjalankan task allowlist. Backup world sebelum menguji building/mining. Mulailah di server lokal atau area yang memang disediakan untuk bot; beberapa kemampuan (diamond mining yang kompleks, desain rumah adaptif, perdagangan multi-step) adalah capability yang dapat dikembangkan melalui plugin dan pengalaman, bukan jaminan keberhasilan di setiap seed atau versi server.
