@@ -7,8 +7,12 @@
     "start": "node src/index.js",
     "dev": "node --watch src/index.js",
     "encrypt-secret": "node scripts/encrypt-secret.js",
+    "build": "npm run check",
     "check": "node --check src/index.js && node --test",
     "test": "node --test"
+  },
+  "engines": {
+    "node": ">=22"
   },
   "keywords": [],
   "author": "",
