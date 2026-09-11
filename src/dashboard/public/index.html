@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Minecraft AI Player</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <main>
+    <header>
+      <div><p class="eyebrow">AUTONOMOUS AGENT</p><h1>Minecraft AI Player</h1></div>
+      <span id="state" class="badge">loading</span>
+    </header>
+    <section class="grid stats">
+      <article><span>Health</span><strong id="health">—</strong></article>
+      <article><span>Hunger</span><strong id="hunger">—</strong></article>
+      <article><span>Position</span><strong id="position">—</strong></article>
+      <article><span>Goal</span><strong id="goal">—</strong></article>
+    </section>
+    <section class="grid panels">
+      <article class="panel">
+        <h2>Control</h2>
+        <div class="row"><button id="start">Start bot</button><button id="stop" class="secondary">Stop</button></div>
+        <label>Dashboard token<input id="token" type="password" autocomplete="off" placeholder="optional for localhost"></label>
+        <label>AI provider<select id="provider"><option value="">Automatic priority</option></select></label>
+      </article>
+      <article class="panel">
+        <h2>Command</h2>
+        <form id="chat"><input id="message" maxlength="240" placeholder="contoh: buat rumah dekat sungai" required><button>Send</button></form>
+        <p class="hint">Survival selalu mengambil alih tugas berprioritas lebih rendah.</p>
+      </article>
+      <article class="panel wide">
+        <h2>Activity</h2><ol id="activity" class="activity"></ol>
+      </article>
+      <article class="panel wide">
+        <h2>API usage</h2><div id="usage" class="usage"></div>
+      </article>
+    </section>
+    <p id="error" role="alert"></p>
+  </main>
+  <script src="/app.js" defer></script>
+</body>
+</html>

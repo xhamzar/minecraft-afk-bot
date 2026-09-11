@@ -1,0 +1,30 @@
+:root { color-scheme: dark; font-family: Inter, ui-sans-serif, system-ui, sans-serif; background:#07110d; color:#e8f5ed; }
+* { box-sizing:border-box; }
+body { margin:0; min-height:100vh; background:radial-gradient(circle at 75% 0,#173f2a 0,transparent 38%),#07110d; }
+main { width:min(1080px,92vw); margin:0 auto; padding:48px 0; }
+header,.row { display:flex; justify-content:space-between; align-items:center; gap:16px; }
+h1 { margin:0; font-size:clamp(2rem,5vw,4rem); letter-spacing:-.05em; }
+h2 { margin-top:0; font-size:1rem; text-transform:uppercase; letter-spacing:.12em; color:#8dbda0; }
+.eyebrow,.hint { color:#70dc96; font-size:.78rem; letter-spacing:.18em; }
+.badge { padding:8px 14px; border:1px solid #2d6745; border-radius:999px; text-transform:uppercase; }
+.badge.online { background:#163c29; color:#7dffa8; }
+.grid { display:grid; gap:14px; }
+.stats { grid-template-columns:repeat(4,1fr); margin:35px 0 14px; }
+.stats article,.panel { padding:20px; border:1px solid #214231; background:rgba(13,31,22,.8); border-radius:14px; }
+.stats span,label { display:block; color:#8dbda0; font-size:.8rem; }
+.stats strong { display:block; margin-top:7px; font-size:1.1rem; overflow:hidden; text-overflow:ellipsis; }
+.panels { grid-template-columns:1fr 1fr; }
+.wide { grid-column:span 2; }
+input,select,button { width:100%; border:1px solid #315d45; border-radius:8px; padding:11px; margin-top:7px; color:inherit; background:#0d2017; }
+button { width:auto; cursor:pointer; border:0; background:#5fe38e; color:#06130a; font-weight:700; }
+button.secondary { color:#f7dede; background:#592d32; }
+label+label { margin-top:15px; }
+form { display:flex; gap:9px; }
+form input { flex:1; }
+.activity { max-height:240px; overflow:auto; margin:0; padding-left:24px; }
+.activity li { padding:5px; color:#bdd2c4; }
+.activity time { color:#638a70; margin-right:8px; }
+.usage { display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:10px; }
+.usage div { background:#091811; border-radius:8px; padding:12px; }
+#error { color:#ff8b8b; min-height:1.5em; }
+@media(max-width:700px){.stats{grid-template-columns:1fr 1fr}.panels{grid-template-columns:1fr}.wide{grid-column:span 1}header{align-items:flex-start;flex-direction:column}}
