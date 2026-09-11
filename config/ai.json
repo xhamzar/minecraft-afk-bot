@@ -1,0 +1,16 @@
+{
+  "timeout_ms": 20000,
+  "cooldown_ms": 60000,
+  "providers": [
+    { "name": "gemini", "enabled": false, "priority": 1, "model": "gemini-3.5-flash", "api_key": "env:GEMINI_API_KEY", "limit": 100 },
+    { "name": "openrouter", "enabled": false, "priority": 2, "model": "meta-llama/llama-3.1-8b-instruct:free", "api_key": "env:OPENROUTER_API_KEY", "limit": 100 },
+    { "name": "openai", "enabled": false, "priority": 3, "model": "gpt-4o-mini", "api_key": "env:OPENAI_API_KEY", "limit": 500 },
+    { "name": "anthropic", "enabled": false, "priority": 4, "model": "claude-haiku-4-5-20251001", "api_key": "env:ANTHROPIC_API_KEY", "limit": 500 },
+    { "name": "deepseek", "enabled": false, "priority": 5, "model": "deepseek-chat", "api_key": "env:DEEPSEEK_API_KEY", "limit": 500 },
+    { "name": "mistral", "enabled": false, "priority": 6, "model": "mistral-small-latest", "api_key": "env:MISTRAL_API_KEY", "limit": 500 },
+    { "name": "huggingface", "enabled": false, "priority": 7, "model": "google/gemma-2-2b-it:fastest", "api_key": "env:HUGGINGFACE_API_KEY", "limit": 100 },
+    { "name": "lmstudio", "enabled": false, "priority": 8, "model": "local-model", "base_url": "http://127.0.0.1:1234/v1", "limit": 0 },
+    { "name": "llamacpp", "enabled": false, "priority": 9, "model": "local-model", "base_url": "http://127.0.0.1:8080/v1", "limit": 0 },
+    { "name": "ollama", "enabled": false, "priority": 10, "model": "llama3.2", "base_url": "http://127.0.0.1:11434", "limit": 0 }
+  ]
+}

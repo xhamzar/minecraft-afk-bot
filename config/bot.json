@@ -1,0 +1,11 @@
+{
+  "server": { "host": "env:BOT_HOST", "port": 25565, "username": "env:BOT_USERNAME", "auth": "offline", "version": false, "viewDistance": "tiny" },
+  "dashboard": { "host": "127.0.0.1", "port": 7860, "token": "env:DASHBOARD_TOKEN" },
+  "autostart": true,
+  "owners": [],
+  "chatPrefix": "!ai",
+  "decisionIntervalMs": 8000,
+  "human": { "minDelayMs": 350, "maxDelayMs": 1200, "mistakeChance": 0.015 },
+  "memoryPath": "data/memory.json",
+  "logPath": "data/bot.log"
+}

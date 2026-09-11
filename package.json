@@ -1,18 +1,26 @@
 {
   "name": "minecraft-afk-bot",
   "version": "1.0.0",
-  "description": "",
-  "main": "bot.js",
+  "description": "Modular autonomous Minecraft Java AI player built on Mineflayer",
+  "main": "src/index.js",
   "scripts": {
-    "start": "node bot.js",
-    "build": "echo build complete"
+    "start": "node src/index.js",
+    "dev": "node --watch src/index.js",
+    "encrypt-secret": "node scripts/encrypt-secret.js",
+    "build": "npm run check && node scripts/build.js",
+    "check": "node --check src/index.js && node --test",
+    "test": "node --test"
+  },
+  "engines": {
+    "node": ">=22"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "type": "commonjs",
   "dependencies": {
+    "express": "^5.1.0",
     "mineflayer": "^4.38.0",
-    "express": "^5.1.0"
+    "mineflayer-pathfinder": "^2.4.5"
   }
 }
